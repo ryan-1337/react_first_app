@@ -1,13 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import { Outlet } from "react-router-dom";
 
-function App() {
-  return (
+export function HomePage() {
+    return(
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+           <code>components/HomePage/HomePage.js</code> my first components.
         </p>
         <a
           className="App-link"
@@ -15,11 +13,11 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React with Benjamin
         </a>
       </header>
+      <Outlet />
     </div>
-  );
+    );
 }
 
-export default App;
