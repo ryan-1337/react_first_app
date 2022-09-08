@@ -1,22 +1,15 @@
 import { Outlet } from "react-router-dom";
+import Carrousel from "../../components/Carrousel/Caroussel";
+import NavBar from "../../components/NavBar/NavBar"
 
 export function HomePage() {
-    return(
+  return (
     <div className="App">
       <header className="App-header">
-        <p>
-           <code>components/HomePage/HomePage.js</code> my first components.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React with Benjamin
-        </a>
+        <NavBar />
+        <Carrousel />
       </header>
       <Outlet />
     </div>
-    );
+  );
 }
