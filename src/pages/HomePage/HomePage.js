@@ -3,6 +3,7 @@ import Carrousel from "../../components/Carrousel/Caroussel";
 import Formula from "../../components/Formula/Formula";
 import InfoSection from "../../components/InfoSection/InfoSection";
 import NavBar from "../../components/NavBar/NavBar"
+import Review from "../../components/Review/Review";
 
 export function HomePage() {
   return (
@@ -19,6 +20,9 @@ export function HomePage() {
         <Formula />
       </section>
       </div>
+      <section id="review" className="bg-secondary">
+        <Review />
+      </section>
       <Outlet />
     </div>
   );

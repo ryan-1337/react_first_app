@@ -11,7 +11,7 @@ export default function Formula() {
             <a href="#" className="btn btn-primary">Go somewhere</a>
           </div>
         </div>
-        <div className="card " style={{ width: "21rem" }}>
+        <div className="card " style={{ width: "23rem" }}>
           <img src="https://www.freepnglogos.com/uploads/1-number-png/1-number-classic-font-style-13.png" className="card-img-top" alt="..." />
           <div className="card-body mx-auto">
             <h5 className="card-title">Card title</h5>
