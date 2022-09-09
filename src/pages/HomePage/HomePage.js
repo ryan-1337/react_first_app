@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import About from "../../components/About/About";
 import Carrousel from "../../components/Carrousel/Caroussel";
 import Formula from "../../components/Formula/Formula";
 import InfoSection from "../../components/InfoSection/InfoSection";
@@ -9,7 +10,7 @@ export function HomePage() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar />
+        <NavBar title="good night"/>
         <Carrousel />
       </header>
       <div className="wrapper mx-5">
@@ -22,6 +23,9 @@ export function HomePage() {
       </div>
       <section id="review" className="bg-secondary">
         <Review />
+      </section>
+      <section id="about">
+        <About />
       </section>
       <Outlet />
     </div>

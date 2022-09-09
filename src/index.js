@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   BrowserRouter,
   Routes,
