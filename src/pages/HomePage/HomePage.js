@@ -5,10 +5,11 @@ import Formula from "../../components/Formula/Formula";
 import InfoSection from "../../components/InfoSection/InfoSection";
 import NavBar from "../../components/NavBar/NavBar"
 import Review from "../../components/Review/Review";
+import Footer from "../../components/Footer/Footer"
 
 export function HomePage() {
   return (
-    <div className="App">
+    <div className="App d-flex flex-column min-vh-100">
       <header className="App-header">
         <NavBar title="good night"/>
         <Carrousel />
@@ -27,6 +28,9 @@ export function HomePage() {
       <section id="about">
         <About />
       </section>
+      <footer className="bg-secondary mt-5">
+        <Footer/>
+      </footer>
       <Outlet />
     </div>
   );
