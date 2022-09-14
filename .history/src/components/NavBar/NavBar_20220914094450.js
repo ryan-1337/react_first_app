@@ -30,7 +30,6 @@ export default function NavBar(props) {
                         <h5 class="modal-title">Connexion</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form onSubmit={handleSubmit}>
                     <div class="modal-body">
                         <label>Username :
                         <input type="text" name="username"/>
@@ -42,7 +41,6 @@ export default function NavBar(props) {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Connexion</button>
                     </div>
-                    </form>
                 </div>
             </div>
         </div >
@@ -50,7 +48,7 @@ export default function NavBar(props) {
     );
 }
 
-function handleSubmit() {
+function loginModal() {
     render (
  
     );

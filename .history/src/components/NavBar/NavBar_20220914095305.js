@@ -50,7 +50,7 @@ export default function NavBar(props) {
     );
 }
 
-function handleSubmit() {
+function loginModal() {
     render (
  
     );
