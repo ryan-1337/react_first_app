@@ -36,7 +36,7 @@ export default function NavBar(props) {
             <li className="nav-item text-end">
               <button
                 type="button"
-                className="btn btn-secondary me-3"
+                className="btn btn-primary me-3"
                 data-bs-toggle="modal"
                 data-bs-target="#inscription"
               >
@@ -78,6 +78,14 @@ export default function NavBar(props) {
                 </label>
               </div>
               <div className="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Fermer
+                </button>
                 <button
                   type="submit"
                   class="btn btn-primary"
