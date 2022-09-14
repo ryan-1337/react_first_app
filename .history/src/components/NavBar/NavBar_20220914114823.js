@@ -77,12 +77,9 @@ export default function NavBar(props) {
                 </label>
               </div>
               <div className="modal-footer">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                <button type="submit" class="btn btn-primary"
+                data-bs-dismiss="modal"
+                aria-label="Close">
                   Connexion
                 </button>
               </div>
@@ -95,9 +92,9 @@ export default function NavBar(props) {
   function handleSubmit(e) {
     e.preventDefault();
     const userJson = {
-      username: user,
-      password: password,
-    };
+        username: user,
+        password: password
+    }
     console.log(JSON.stringify(userJson));
   }
 }
