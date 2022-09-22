@@ -28,22 +28,79 @@ export default function NavBar(props) {
                 type="button"
                 className="btn btn-secondary me-3"
                 data-bs-toggle="modal"
-                data-bs-target="#myModal"
+                data-bs-target="#connexion"
               >
                 <a className="nav-link">Connexion</a>
               </button>
             </li>
             <li className="nav-item text-end">
-              <button type="button" className="btn btn-primary">
-                <a className="nav-link" href="#">
-                  Inscription
-                </a>
+              <button
+                type="button"
+                className="btn btn-primary me-3"
+                data-bs-toggle="modal"
+                data-bs-target="#inscription"
+              >
+                <a className="nav-link">Inscription</a>
               </button>
             </li>
           </ul>
+      <div class="modal" id="inscription" tabIndex="-1">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Inscription</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form onSubmit={handleRegister}>
+              <div className="modal-body">
+                <label>
+                  Username :
+                  <input
+                    type="text"
+                    name="username"
+                    value={user}
+                    onChange={(e) => setUser(e.target.value)}
+                  />
+                </label>
+                <label>
+                  Password :
+                  <input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Fermer
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Enregistrer
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
         </div>
       </div>
-      <div class="modal" id="myModal" tabIndex="-1">
+      <div class="modal" id="connexion" tabIndex="-1">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -90,9 +147,19 @@ export default function NavBar(props) {
           </div>
         </div>
       </div>
+      </div>
     </nav>
   );
   function handleSubmit(e) {
+    e.preventDefault();
+    const userJson = {
+      username: user,
+      password: password,
+    };
+    console.log(JSON.stringify(userJson));
+  }
+
+  function handleRegister(e) {
     e.preventDefault();
     const userJson = {
       username: user,
