@@ -12,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetConnectionString("GoodNightDatabase"));
+
+
 builder.Services.AddDbContext<HotelContext>(opts =>
 {
     var connString = builder.Configuration.GetConnectionString("GoodNightDatabase");
