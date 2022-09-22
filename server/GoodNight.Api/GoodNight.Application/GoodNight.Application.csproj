@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GoodNight.Domain\GoodNight.Domain.csproj" />
+    <ProjectReference Include="..\GoodNight.Infrastructure\GoodNight.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
