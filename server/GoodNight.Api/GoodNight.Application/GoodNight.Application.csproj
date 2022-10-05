@@ -8,7 +8,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GoodNight.Domain\GoodNight.Domain.csproj" />
-    <ProjectReference Include="..\GoodNight.Infrastructure\GoodNight.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserApplication\Validations\" />
+    <Folder Include="UserApplication\Responses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.0.0" />
   </ItemGroup>
 
 </Project>

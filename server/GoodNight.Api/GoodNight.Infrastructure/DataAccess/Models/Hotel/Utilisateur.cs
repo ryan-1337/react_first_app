@@ -1,8 +1,9 @@
 ﻿namespace GoodNight.Infrastructure.DataAccess.Models.Hotel;
 
-public class USER
+public class Utilisateur
 {
-    public string ID { get; set; }
+
+    public int ID { get; set; }
     public string USERNAME { get; set; }
     public string PASSWORD { get; set; }
 }
