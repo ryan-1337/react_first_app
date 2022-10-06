@@ -1,4 +1,5 @@
 ﻿using GoodNight.Infrastructure.DataAccess.Models.Configurations;
+using GoodNight.Infrastructure.DataAccess.Models.Hotel;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Contracts;
 
@@ -8,10 +9,9 @@ namespace GoodNight.Infrastructure.DataAccess
     { 
         public HotelContext(DbContextOptions<HotelContext> options) : base(options) 
         { 
-        
         }
 
-        public DbSet<UserConfiguration> User { get; set; }
+        public DbSet<Utilisateur> Utilisateur { get; set; }
     }
 }
 

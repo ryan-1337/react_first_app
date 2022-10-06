@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Hotel;
 
-public class UserConfiguration : IEntityTypeConfiguration<USER>
+public class UserConfiguration : IEntityTypeConfiguration<Utilisateur>
 {
-    public void Configure(EntityTypeBuilder<USER> entity)
+    public void Configure(EntityTypeBuilder<Utilisateur> entity)
     {
-        entity.ToTable("USER", "Hotel");
+        entity.ToTable("Utilisateur", "Hotel");
 
         entity.Property(e => e.ID);
         entity.Property(e => e.USERNAME)
