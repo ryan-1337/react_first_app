@@ -15,5 +15,7 @@ public class UserConfiguration : IEntityTypeConfiguration<Utilisateur>
             .HasMaxLength(30).IsRequired();
         entity.Property(e => e.PASSWORD)
             .HasMaxLength(30).IsRequired();
+        entity.Property(e => e.INSCRIPTION_DATE);
+
     }
 }
