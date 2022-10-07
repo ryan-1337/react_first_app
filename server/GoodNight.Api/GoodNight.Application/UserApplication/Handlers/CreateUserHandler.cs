@@ -20,6 +20,6 @@ public class CreateUserHandler : IRequestHandler<CreateUserQuery, UserResponse>
 
         if (user == null) return null;
 
-        return new UserResponse { Id = user.id, UserName = user.username };
+        return new UserResponse { Id = user.id, UserName = user.username, InscriptionDate = user.inscription_date };
     }
 }

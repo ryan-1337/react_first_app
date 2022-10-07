@@ -5,6 +5,7 @@ using GoodNight.Domain;
 using GoodNight.Infrastructure.DataAccess.Models.Hotel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using BCrypt.Net;
 
 public class UserRepository : IUserRepository
 {
@@ -33,12 +34,13 @@ public class UserRepository : IUserRepository
     {
         if (user == null) return null;
 
-        var userSaved = await this.hotelContext.Utilisateur.AddAsync(new Utilisateur {  USERNAME = user.username, PASSWORD = user.password });
+        var userSaved = await this.hotelContext.Utilisateur.AddAsync(new Utilisateur {  USERNAME = user.username, PASSWORD =  BCrypt.HashPassword(user.password), INSCRIPTION_DATE = DateTime.Now });
         await this.hotelContext.SaveChangesAsync();
 
         user.id = userSaved.Entity.ID;
         user.username = userSaved.Entity.USERNAME;
         user.password = String.Empty;
+        user.inscription_date = userSaved.Entity.INSCRIPTION_DATE;
 
         return user;
     }
