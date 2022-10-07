@@ -2,7 +2,7 @@
 
 .history/
 
-/docker/data/
+../docker/data/
 
 # dependencies
 /node_modules
