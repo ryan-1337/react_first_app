@@ -1,7 +1,5 @@
-﻿using GoodNight.Infrastructure.DataAccess.Models.Configurations;
-using GoodNight.Infrastructure.DataAccess.Models.Hotel;
+﻿using GoodNight.Infrastructure.DataAccess.Models.Hotel;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Contracts;
 
 namespace GoodNight.Infrastructure.DataAccess
 {

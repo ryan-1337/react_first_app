@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/login")]
 public class LoginController : ControllerBase
 {
-
     private readonly IMediator mediator;
 
     public LoginController(IMediator mediator)

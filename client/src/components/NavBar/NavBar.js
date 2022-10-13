@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { useState } from "react";
 import Swal from 'sweetalert2';
+import api from "../../env/base_api_url";
 import Modal from 'react-bootstrap/Modal';
 
 
@@ -9,9 +10,9 @@ export default function NavBar(props) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [showModalRegister, setShowModalRegister] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isConnectedName, setIsConnectedName] = useState("");
   const [showModalConnexion, setShowModalConnexion] = useState(false);
-  const [showLogin, setShowLogin] = useState();
-  const [showLogout, setShowLogout] = useState(['Inscription', 'btn-primary']);
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
@@ -31,10 +32,12 @@ export default function NavBar(props) {
         </button>
         <div className="justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
+            {!isConnected ? 
+            <>
             <li className="nav-item text-end">
               <button
                 type="button"
-                className={"btn btn-secondary me-3 " + showLogin}
+                className="btn btn-secondary me-3"
                 onClick={() => setShowModalConnexion(true)}
               >
                 <a className="nav-link">Connexion</a>
@@ -43,12 +46,23 @@ export default function NavBar(props) {
             <li className="nav-item text-end">
               <button
                 type="button"
-                className={"btn " + showLogout[1] + " me-3"}
-                onClick={() => {if(showLogout[0] === "Inscription") { setShowModalRegister(true)} else { handleLogout() } } }
+                className="btn btn-primary me-3"
+                onClick={() => setShowModalRegister(true)}
               >
-                <a className="nav-link">{showLogout[0]}</a>
+                <a className="nav-link">Inscription</a>
               </button>
             </li>
+            </> :
+            <li className="nav-item text-end">
+              <button
+                type="button"
+                className="btn btn-danger me-3"
+                onClick={() => handleLogout()}
+              >
+                <a className="nav-link">{ isConnectedName + ' Logout' }</a> 
+              </button>
+            </li>
+            }
           </ul>
           <Modal show={showModalRegister} onHide={() => setShowModalRegister(false)}>
             <Modal.Header closeButton>
@@ -160,7 +174,7 @@ export default function NavBar(props) {
     </nav>
   );
   function handleConnexion(e) {
-    const url = 'https://localhost:44360/api/login';
+    const url = api + 'login';
     e.preventDefault();
     const userJson = {
       username: user,
@@ -192,8 +206,8 @@ export default function NavBar(props) {
           showConfirmButton: false,
           timer: 1500
         })
-        setShowLogin('d-none');
-        setShowLogout([userJson.username + ' Logout', 'btn-danger']);
+        setIsConnected(true);
+        setIsConnectedName(userJson.username);
         localStorage.setItem('cookie', userJson.username);
       }
         setShowModalConnexion(false);
@@ -205,12 +219,11 @@ export default function NavBar(props) {
 
   function handleLogout() {
     localStorage.clear();
-    setShowLogin();
-    setShowLogout(['Inscription', 'btn-primary']);
+    setIsConnected(false);
   }
 
   function handleRegister(e) {
-    const url = 'https://localhost:44360/api/users';
+    const url = api + 'users';
     e.preventDefault();
     const userJson = {
       username: user,
