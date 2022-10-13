@@ -34,7 +34,7 @@ public class UserRepository : IUserRepository
     {
         if (user == null) return null;
 
-        var userSaved = await this.hotelContext.Utilisateur.AddAsync(new Utilisateur {  USERNAME = user.username, PASSWORD =  BCrypt.HashPassword(user.password), INSCRIPTION_DATE = DateTime.Now });
+        var userSaved = await this.hotelContext.Utilisateur.AddAsync(new Utilisateur {  USERNAME = user.username, PASSWORD =  BCrypt.HashPassword(user.password), INSCRIPTION_DATE = DateTime.Now});
         await this.hotelContext.SaveChangesAsync();
 
         user.id = userSaved.Entity.ID;
@@ -43,5 +43,26 @@ public class UserRepository : IUserRepository
         user.inscription_date = userSaved.Entity.INSCRIPTION_DATE;
 
         return user;
+    }
+
+    public async Task<User?> LoginAsync(User user)
+    {
+        var userToLog = await this.hotelContext.Utilisateur.Where(u => u.USERNAME == user.username).FirstOrDefaultAsync();
+
+        if (userToLog == null) return null;
+
+        var password = BCrypt.Verify(user.password, userToLog.PASSWORD);
+
+        if(password)
+        {
+            userToLog.CONNEXION_DATE = DateTime.Now;
+            this.hotelContext.Utilisateur.Update(userToLog); 
+            await this.hotelContext.SaveChangesAsync();
+            return new User { id = userToLog.ID, username = userToLog.USERNAME, connexion_date = (DateTime)userToLog.CONNEXION_DATE };
+        }
+        else
+        {
+            return null;
+        }
     }
 }

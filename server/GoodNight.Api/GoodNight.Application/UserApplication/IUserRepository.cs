@@ -12,4 +12,5 @@ public interface IUserRepository
     Task<IList<User>> getAllUserAsync();
     Task<User?> getUserByIdAsync(int id);
     Task<User?> CreateUserAsync(User user);
+    Task<User?> LoginAsync(User user);
 }
