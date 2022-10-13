@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import { useState } from "react";
+import Swal from 'sweetalert2';
 import Modal from 'react-bootstrap/Modal';
 
 
@@ -9,6 +10,8 @@ export default function NavBar(props) {
   const [password, setPassword] = useState("");
   const [showModalRegister, setShowModalRegister] = useState(false);
   const [showModalConnexion, setShowModalConnexion] = useState(false);
+  const [showLogin, setShowLogin] = useState();
+  const [showLogout, setShowLogout] = useState(['Inscription', 'btn-primary']);
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
@@ -31,7 +34,7 @@ export default function NavBar(props) {
             <li className="nav-item text-end">
               <button
                 type="button"
-                className="btn btn-secondary me-3"
+                className={"btn btn-secondary me-3 " + showLogin}
                 onClick={() => setShowModalConnexion(true)}
               >
                 <a className="nav-link">Connexion</a>
@@ -40,10 +43,10 @@ export default function NavBar(props) {
             <li className="nav-item text-end">
               <button
                 type="button"
-                className="btn btn-primary me-3"
-                onClick={() => setShowModalRegister(true)}
+                className={"btn " + showLogout[1] + " me-3"}
+                onClick={() => {if(showLogout[0] === "Inscription") { setShowModalRegister(true)} else { handleLogout() } } }
               >
-                <a className="nav-link">Inscription</a>
+                <a className="nav-link">{showLogout[0]}</a>
               </button>
             </li>
           </ul>
@@ -157,12 +160,53 @@ export default function NavBar(props) {
     </nav>
   );
   function handleConnexion(e) {
+    const url = 'https://localhost:44360/api/login';
     e.preventDefault();
     const userJson = {
       username: user,
       password: password,
     };
     console.log(JSON.stringify(userJson));
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userJson)
+    })
+      .then(response => response.json())
+      .then(responseFromServer => {
+        console.log(responseFromServer);
+        if (responseFromServer.status === 404) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: responseFromServer.detail,
+          });
+        }
+        else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: userJson.username + ' Connected !',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setShowLogin('d-none');
+        setShowLogout([userJson.username + ' Logout', 'btn-danger']);
+        localStorage.setItem('cookie', userJson.username);
+      }
+        setShowModalConnexion(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  function handleLogout() {
+    localStorage.clear();
+    setShowLogin();
+    setShowLogout(['Inscription', 'btn-primary']);
   }
 
   function handleRegister(e) {

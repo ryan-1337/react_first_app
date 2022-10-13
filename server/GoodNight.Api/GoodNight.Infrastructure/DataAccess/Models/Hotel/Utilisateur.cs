@@ -7,4 +7,5 @@ public class Utilisateur
     public string USERNAME { get; set; }
     public string PASSWORD { get; set; }
     public DateTime INSCRIPTION_DATE { get; set; }
+    public DateTime? CONNEXION_DATE { get; set; }
 }
