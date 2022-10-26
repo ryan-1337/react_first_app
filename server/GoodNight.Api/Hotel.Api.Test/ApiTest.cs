@@ -1,7 +1,5 @@
 using Bogus;
 using FizzWare.NBuilder;
-using GoodNight.Application.UserApplication;
-using GoodNight.Application.UserApplication.Handlers;
 using GoodNight.Application.UserApplication.Queries;
 using GoodNight.Application.UserApplication.Responses;
 using GoodNight.Domain;
@@ -26,7 +24,7 @@ namespace Hotel.Api.Test
         [Fact]
         public async Task GetAllUsersReturnsHttpFoundResultWhenUsersIsOk()
         {
-            var controller = new UserController(mediator.Object);
+            var controller = new UserController(this.mediator.Object);
             var result = await controller.GetAllUsers();
 
             Assert.IsType<OkObjectResult>(result.Result);
@@ -46,7 +44,7 @@ namespace Hotel.Api.Test
                .Setup(mock => mock.Send(It.IsAny<GetUserByIdQuery>(), It.IsAny<CancellationToken>()))
                .ReturnsAsync(fakeUserResponse);
 
-            var controller = new UserController(mediator.Object);
+            var controller = new UserController(this.mediator.Object);
             var result = await controller.GetUserById(fakerData.Random.Int());
 
             Assert.IsType<OkObjectResult>(result.Result);
@@ -62,7 +60,7 @@ namespace Hotel.Api.Test
                 .With(u => u.InscriptionDate = fakerData.Date.Recent())
                 .Build();
 
-            var controller = new UserController(mediator.Object);
+            var controller = new UserController(this.mediator.Object);
             var result = await controller.GetUserById(fakerData.Random.Int());
 
             Assert.IsType<NotFoundObjectResult>(result.Result);
@@ -72,11 +70,11 @@ namespace Hotel.Api.Test
         [Fact]
         public async Task GetUsersByIdReturnsHttpNotFoundResultWhenUsersIsKo()
         {
-            mediator
+            this.mediator
             .Setup(mock => mock.Send(It.IsAny<GetUserByIdQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult<UserResponse>(null));
 
-            var controller = new UserController(mediator.Object);
+            var controller = new UserController(this.mediator.Object);
             var result = await controller.GetUserById(fakerData.Random.Int());
 
             Assert.IsType<NotFoundObjectResult>(result.Result);
@@ -92,11 +90,11 @@ namespace Hotel.Api.Test
                 .With(u => u.inscription_date = fakerData.Date.Recent())
                 .Build();
 
-            mediator
+            this.mediator
             .Setup(mock => mock.Send(It.IsAny<CreateUserQuery>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new UserResponse { Id = 1 });
 
-            var controller = new UserController(mediator.Object);
+            var controller = new UserController(this.mediator.Object);
 
             var result = await controller.CreateUser(fakeUser);
 
@@ -113,7 +111,7 @@ namespace Hotel.Api.Test
                 .With(u => u.inscription_date = fakerData.Date.Recent())
                 .Build();
 
-            var controller = new UserController(mediator.Object);
+            var controller = new UserController(this.mediator.Object);
 
             var result = await controller.CreateUser(fakeUser);
 

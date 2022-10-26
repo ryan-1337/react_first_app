@@ -3,18 +3,14 @@ using FizzWare.NBuilder;
 using GoodNight.Application.UserApplication;
 using GoodNight.Application.UserApplication.Handlers;
 using GoodNight.Application.UserApplication.Queries;
-using GoodNight.Application.UserApplication.Responses;
 using GoodNight.Domain;
-using GoodNight.Infrastructure.DataAccess.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 
 namespace Hotel.Application.Test
 {
     public class ApplicationTest
     {
-
         private Faker fakerData;
         private Mock<IMediator> mediator;
         private Mock<IUserRepository> userRepositoryMock;
@@ -29,7 +25,6 @@ namespace Hotel.Application.Test
         [Fact]
         public async Task GetAllUsersHandlerReturnsNotNullWhenUsersIsOk()
         {
-
             var fakeUserList = Builder<User>
                 .CreateListOfSize(5)
                 .All()
@@ -53,7 +48,6 @@ namespace Hotel.Application.Test
         [Fact]
         public async Task GetAllUsersHandlerReturnsEmptyValueWhenUsersIsEmpty()
         {
-
             var fakeUserList = new List<User>();
                 
             userRepositoryMock.Setup(mock => mock.getAllUserAsync())
@@ -69,7 +63,6 @@ namespace Hotel.Application.Test
         [Fact]
         public async Task GetUsersByIdHandlerReturnsNotNullWhenUserIsOk()
         {
-
             var fakeUser = Builder<User>
                 .CreateNew()
                 .With(u => u.id = fakerData.Random.Int())
@@ -90,7 +83,6 @@ namespace Hotel.Application.Test
         [Fact]
         public async Task GetUsersByIdHandlerReturnsNullWhenUserIsNotExist()
         {
-
             var fakeUser = Builder<User>
                 .CreateNew()
                 .With(u => u.id = fakerData.Random.Int())
@@ -111,7 +103,6 @@ namespace Hotel.Application.Test
         [Fact]
         public async Task IsUserLoggedReturnsNotNullWhenUserIsOk()
         {
-
             var fakeUser = Builder<User>
                 .CreateNew()
                 .With(u => u.id = fakerData.Random.Int())
@@ -131,7 +122,6 @@ namespace Hotel.Application.Test
         [Fact]
         public async Task IsUserNotLoggedReturnsNullWhenUserIsKo()
         {
-
             var fakeUser = new User();
 
             userRepositoryMock.Setup(mock => mock.LoginAsync(null))
@@ -146,7 +136,6 @@ namespace Hotel.Application.Test
         [Fact]
         public async Task IsUserCreatedReturnsNotNullWhenUserIsOk()
         {
-
             var fakeUser = Builder<User>
                 .CreateNew()
                 .With(u => u.id = fakerData.Random.Int())
@@ -181,6 +170,5 @@ namespace Hotel.Application.Test
 
             Assert.Null(result);
         }
-
     }
 }
