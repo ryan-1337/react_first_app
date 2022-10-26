@@ -5,11 +5,19 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodNight.Api", "GoodNightApi\GoodNight.Api.csproj", "{38A5695B-C37C-42CD-9F70-A6E7064A5EB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodNight.Application", "GoodNight.Application\GoodNight.Application.csproj", "{BB2FAE75-1E4A-41AA-BCAC-76C645092807}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodNight.Application", "GoodNight.Application\GoodNight.Application.csproj", "{BB2FAE75-1E4A-41AA-BCAC-76C645092807}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodNight.Domain", "GoodNight.Domain\GoodNight.Domain.csproj", "{57DE6B42-3CAD-47CF-B506-C8E4CB8BB165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodNight.Domain", "GoodNight.Domain\GoodNight.Domain.csproj", "{57DE6B42-3CAD-47CF-B506-C8E4CB8BB165}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodNight.Infrastructure", "GoodNight.Infrastructure\GoodNight.Infrastructure.csproj", "{2F9498FD-FC71-4EAD-8961-A2E9BE7B2E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodNight.Infrastructure", "GoodNight.Infrastructure\GoodNight.Infrastructure.csproj", "{2F9498FD-FC71-4EAD-8961-A2E9BE7B2E4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3326F545-D80E-444C-A58B-1936FB6C4F5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Api.Test", "Hotel.Api.Test\Hotel.Api.Test.csproj", "{471FD1D6-3D06-492B-A253-89A0FE780CA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Application.Test", "Hotel.Application.Test\Hotel.Application.Test.csproj", "{7F0914B9-CF0D-431D-B200-4D7B6C42A748}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Infrastructure.Test", "Hotel.Infrastructure.Test\Hotel.Infrastructure.Test.csproj", "{BD70BC4A-722C-48E3-95FA-BFC57E2DF4FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +41,26 @@ Global
 		{2F9498FD-FC71-4EAD-8961-A2E9BE7B2E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F9498FD-FC71-4EAD-8961-A2E9BE7B2E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F9498FD-FC71-4EAD-8961-A2E9BE7B2E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{471FD1D6-3D06-492B-A253-89A0FE780CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{471FD1D6-3D06-492B-A253-89A0FE780CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{471FD1D6-3D06-492B-A253-89A0FE780CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{471FD1D6-3D06-492B-A253-89A0FE780CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F0914B9-CF0D-431D-B200-4D7B6C42A748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0914B9-CF0D-431D-B200-4D7B6C42A748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0914B9-CF0D-431D-B200-4D7B6C42A748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0914B9-CF0D-431D-B200-4D7B6C42A748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD70BC4A-722C-48E3-95FA-BFC57E2DF4FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD70BC4A-722C-48E3-95FA-BFC57E2DF4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD70BC4A-722C-48E3-95FA-BFC57E2DF4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD70BC4A-722C-48E3-95FA-BFC57E2DF4FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{471FD1D6-3D06-492B-A253-89A0FE780CA5} = {3326F545-D80E-444C-A58B-1936FB6C4F5D}
+		{7F0914B9-CF0D-431D-B200-4D7B6C42A748} = {3326F545-D80E-444C-A58B-1936FB6C4F5D}
+		{BD70BC4A-722C-48E3-95FA-BFC57E2DF4FE} = {3326F545-D80E-444C-A58B-1936FB6C4F5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12D14854-5DDE-4A55-AF8E-D041FE7B455A}
