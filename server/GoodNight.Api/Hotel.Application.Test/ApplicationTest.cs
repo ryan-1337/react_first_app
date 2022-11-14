@@ -181,11 +181,11 @@ namespace Hotel.Application.Test
                 .With(u => u.connexion_date = fakerData.Date.Recent())
                 .Build();
 
-            userRepositoryMock.Setup(mock => mock.LogoutUserAsync(fakeUser))
+            userRepositoryMock.Setup(mock => mock.LogoutUserAsync(fakeUser.id))
                 .ReturnsAsync(fakeUser);
 
             var handlder = new LogoutUserHandler(userRepositoryMock.Object);
-            var result = await handlder.Handle(new LogoutUserQuery(fakeUser), new CancellationToken());
+            var result = await handlder.Handle(new LogoutUserQuery(fakeUser.id), new CancellationToken());
 
             Assert.NotNull(result);
         }
@@ -195,11 +195,11 @@ namespace Hotel.Application.Test
         {
             var fakeUser = new User();
 
-            userRepositoryMock.Setup(mock => mock.LogoutUserAsync(null))
+            userRepositoryMock.Setup(mock => mock.LogoutUserAsync(0))
                 .ReturnsAsync(fakeUser);
 
             var handlder = new LogoutUserHandler(userRepositoryMock.Object);
-            var result = await handlder.Handle(new LogoutUserQuery(fakeUser), new CancellationToken());
+            var result = await handlder.Handle(new LogoutUserQuery(fakeUser.id), new CancellationToken());
 
             Assert.Null(result);
         }

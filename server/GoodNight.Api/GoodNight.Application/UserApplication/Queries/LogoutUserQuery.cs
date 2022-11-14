@@ -6,11 +6,11 @@ using MediatR;
 
 public class LogoutUserQuery : IRequest<LogoutUserResponse>
 {
-    public User user;
+    public int id;
 
-    public LogoutUserQuery(User user)
+    public LogoutUserQuery(int id)
     {
-        this.user = user;
+        this.id = id;
     }
     
 }

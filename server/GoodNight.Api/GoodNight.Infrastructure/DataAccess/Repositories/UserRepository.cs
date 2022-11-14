@@ -65,9 +65,9 @@ public class UserRepository : IUserRepository
             return null;
         }
     }
-    public async Task<User?> LogoutUserAsync(User user)
+    public async Task<User?> LogoutUserAsync(int id)
     {
-        var userToLogout = await this.hotelContext.Utilisateur.FirstOrDefaultAsync(u => u.USERNAME == user.username);
+        var userToLogout = await this.hotelContext.Utilisateur.FirstOrDefaultAsync(u => u.ID == id);
 
         if (userToLogout == null) 
         {

@@ -15,7 +15,7 @@ public class LogoutUserHandler : IRequestHandler<LogoutUserQuery, LogoutUserResp
 
     public async Task<LogoutUserResponse> Handle(LogoutUserQuery request, CancellationToken cancellationToken)
     {
-        var user = await userRepository.LogoutUserAsync(request.user);
+        var user = await userRepository.LogoutUserAsync(request.id);
 
         if (user == null) return null;
 

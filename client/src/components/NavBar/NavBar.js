@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import api from "../../env/base_api_url";
 import Modal from 'react-bootstrap/Modal';
 
-
+let id;
 
 export default function NavBar(props) {
   const [user, setUser] = useState("");
@@ -209,6 +209,7 @@ export default function NavBar(props) {
         setIsConnected(true);
         setIsConnectedName(userJson.username);
         localStorage.setItem('cookie', userJson.username);
+        id = responseFromServer.id;
       }
         setShowModalConnexion(false);
       })
@@ -219,9 +220,9 @@ export default function NavBar(props) {
 
   function handleLogout() {
     const url = api + 'users/logout';
+    console.log(id);
     const userJson = {
-      username: user,
-      password: password,
+      id: id,
     };
     console.log(JSON.stringify(userJson));
     fetch(url, {
@@ -245,7 +246,7 @@ export default function NavBar(props) {
           Swal.fire({
             position: 'top-end',
             icon: 'warning',
-            title: userJson.username + ' Disconnected !',
+            title: responseFromServer.userName + ' Disconnected !',
             showConfirmButton: false,
             timer: 1500
           })

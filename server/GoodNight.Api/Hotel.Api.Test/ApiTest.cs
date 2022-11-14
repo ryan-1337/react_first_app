@@ -122,11 +122,9 @@ namespace Hotel.Api.Test
         [Fact]
         public async Task LogoutReturnsHttpStatusOk()
         {
-            var fakeUser = Builder<User>
+            var fakeUser = Builder<UserLogout>
                 .CreateNew()
                 .With(u => u.id = fakerData.Random.Int())
-                .With(u => u.username = fakerData.Lorem.Text())
-                .With(u => u.inscription_date = fakerData.Date.Recent())
                 .Build();
 
             this.mediator
@@ -142,11 +140,9 @@ namespace Hotel.Api.Test
         [Fact]
         public async Task LogoutReturnsHttpStatusUnauthorized()
         {
-            var fakeUser = Builder<User>
+            var fakeUser = Builder<UserLogout>
                 .CreateNew()
                 .With(u => u.id = fakerData.Random.Int())
-                .With(u => u.username = fakerData.Lorem.Text())
-                .With(u => u.inscription_date = fakerData.Date.Recent())
                 .Build();
 
             var controller = new UserController(this.mediator.Object);

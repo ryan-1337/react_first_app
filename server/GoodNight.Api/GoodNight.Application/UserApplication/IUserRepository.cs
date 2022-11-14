@@ -13,5 +13,5 @@ public interface IUserRepository
     Task<User?> GetUserByIdAsync(int id);
     Task<User?> CreateUserAsync(User user);
     Task<User?> LoginAsync(User user);
-    Task<User?> LogoutUserAsync(User user);
+    Task<User?> LogoutUserAsync(int id);
 }
