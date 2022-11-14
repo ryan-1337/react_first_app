@@ -4,6 +4,7 @@ using GoodNight.Application.UserApplication.Responses;
 using GoodNight.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 [ApiController]
 [Route("api/users")]
@@ -60,5 +61,27 @@ public class UserController : ControllerBase
             });
         }
         return Ok(result);
+    }
+
+    [HttpPost("logout")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<UserResponse>> LogoutUser(UserLogout user)
+    {
+
+        var query = new LogoutUserQuery(user.id);
+        var result = await mediator.Send(query);
+        
+        if(result == null)
+        {
+            return Unauthorized(result);
+        }
+
+        return Ok(result);
+    }
+
+    public class toto
+    {
+        public int Id { get; set; }
     }
 }

@@ -20,5 +20,6 @@ public class UserConfiguration : IEntityTypeConfiguration<Utilisateur>
             .IsRequired();
         entity.Property(e => e.INSCRIPTION_DATE);
         entity.Property(e => e.CONNEXION_DATE);
+        entity.Property(e => e.DECONNEXION_DATE);
     }
 }

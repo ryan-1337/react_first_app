@@ -5,6 +5,7 @@ using GoodNight.Application.UserApplication.Responses;
 using GoodNight.Domain;
 using GoodNightApi.Controllers;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -116,6 +117,38 @@ namespace Hotel.Api.Test
             var result = await controller.CreateUser(fakeUser);
 
             Assert.IsType<NotFoundObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task LogoutReturnsHttpStatusOk()
+        {
+            var fakeUser = Builder<UserLogout>
+                .CreateNew()
+                .With(u => u.id = fakerData.Random.Int())
+                .Build();
+
+            this.mediator
+            .Setup(mock => mock.Send(It.IsAny<LogoutUserQuery>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new LogoutUserResponse { Id = fakeUser.id });
+
+            var controller = new UserController(this.mediator.Object);
+            var result = await controller.LogoutUser(fakeUser);
+
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task LogoutReturnsHttpStatusUnauthorized()
+        {
+            var fakeUser = Builder<UserLogout>
+                .CreateNew()
+                .With(u => u.id = fakerData.Random.Int())
+                .Build();
+
+            var controller = new UserController(this.mediator.Object);
+            var result = await controller.LogoutUser(fakeUser);
+
+            Assert.IsType<UnauthorizedObjectResult>(result.Result);
         }
     }
 }

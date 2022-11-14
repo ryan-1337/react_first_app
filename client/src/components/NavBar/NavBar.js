@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import api from "../../env/base_api_url";
 import Modal from 'react-bootstrap/Modal';
 
-
+let id;
 
 export default function NavBar(props) {
   const [user, setUser] = useState("");
@@ -209,6 +209,7 @@ export default function NavBar(props) {
         setIsConnected(true);
         setIsConnectedName(userJson.username);
         localStorage.setItem('cookie', userJson.username);
+        id = responseFromServer.id;
       }
         setShowModalConnexion(false);
       })
@@ -218,9 +219,45 @@ export default function NavBar(props) {
   }
 
   function handleLogout() {
-    localStorage.clear();
-    setIsConnected(false);
-  }
+    const url = api + 'users/logout';
+    console.log(id);
+    const userJson = {
+      id: id,
+    };
+    console.log(JSON.stringify(userJson));
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userJson)
+    })
+      .then(response => response.json())
+      .then(responseFromServer => {
+        console.log(responseFromServer);
+        if (responseFromServer.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: responseFromServer.detail,
+          });
+        }
+        else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: responseFromServer.userName + ' Disconnected !',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          localStorage.clear();
+          setIsConnected(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
 
   function handleRegister(e) {
     const url = api + 'users';
