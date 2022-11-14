@@ -79,9 +79,4 @@ public class UserController : ControllerBase
 
         return Ok(result);
     }
-
-    public class toto
-    {
-        public int Id { get; set; }
-    }
 }
