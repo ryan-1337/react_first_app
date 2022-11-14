@@ -244,8 +244,8 @@ export default function NavBar(props) {
         else {
           Swal.fire({
             position: 'top-end',
-            icon: 'success',
-            title: userJson.username + ' Dscconnected !',
+            icon: 'warning',
+            title: userJson.username + ' Disconnected !',
             showConfirmButton: false,
             timer: 1500
           })
