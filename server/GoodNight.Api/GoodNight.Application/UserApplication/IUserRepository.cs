@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 public interface IUserRepository
 {
-    Task<IList<User>> getAllUserAsync();
-    Task<User?> getUserByIdAsync(int id);
+    Task<IList<User>> GetAllUserAsync();
+    Task<User?> GetUserByIdAsync(int id);
     Task<User?> CreateUserAsync(User user);
     Task<User?> LoginAsync(User user);
+    Task<User?> LogoutUserAsync(User user);
 }

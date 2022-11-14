@@ -20,7 +20,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserRes
 
     public async Task<List<UserResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        var user = await userRepository.getAllUserAsync();
+        var user = await userRepository.GetAllUserAsync();
 
         var response = user.Select(u => new UserResponse { Id = u.id, UserName = u.username }).ToList();
         

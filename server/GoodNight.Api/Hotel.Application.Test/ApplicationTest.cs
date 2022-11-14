@@ -34,13 +34,13 @@ namespace Hotel.Application.Test
                 .Build()
                 .ToList();
                 
-            userRepositoryMock.Setup(mock => mock.getAllUserAsync())
+            userRepositoryMock.Setup(mock => mock.GetAllUserAsync())
                 .ReturnsAsync(fakeUserList);
 
             var handlder = new GetAllUsersHandler(userRepositoryMock.Object);
             var result = await handlder.Handle(new GetAllUsersQuery(), new CancellationToken());
 
-            userRepositoryMock.Verify(m => m.getAllUserAsync(), Times.Once);
+            userRepositoryMock.Verify(m => m.GetAllUserAsync(), Times.Once);
             Assert.NotNull(result);
             Assert.Equal(5, result.Count);
         }
@@ -50,13 +50,13 @@ namespace Hotel.Application.Test
         {
             var fakeUserList = new List<User>();
                 
-            userRepositoryMock.Setup(mock => mock.getAllUserAsync())
+            userRepositoryMock.Setup(mock => mock.GetAllUserAsync())
                 .ReturnsAsync(fakeUserList);
 
             var handlder = new GetAllUsersHandler(userRepositoryMock.Object);
             var result = await handlder.Handle(new GetAllUsersQuery(), new CancellationToken());
 
-            userRepositoryMock.Verify(m => m.getAllUserAsync(), Times.Once);
+            userRepositoryMock.Verify(m => m.GetAllUserAsync(), Times.Once);
             Assert.Empty(result);
         }
 
@@ -70,13 +70,13 @@ namespace Hotel.Application.Test
                 .With(u => u.inscription_date = fakerData.Date.Recent())
                 .Build();
                 
-            userRepositoryMock.Setup(mock => mock.getUserByIdAsync(fakeUser.id))
+            userRepositoryMock.Setup(mock => mock.GetUserByIdAsync(fakeUser.id))
                 .ReturnsAsync(fakeUser);
 
             var handlder = new GetUserByIdHandler(userRepositoryMock.Object);
             var result = await handlder.Handle(new GetUserByIdQuery(fakeUser.id), new CancellationToken());
 
-            userRepositoryMock.Verify(m => m.getUserByIdAsync(fakeUser.id), Times.Once);
+            userRepositoryMock.Verify(m => m.GetUserByIdAsync(fakeUser.id), Times.Once);
             Assert.NotNull(result);
         }
 
@@ -90,13 +90,13 @@ namespace Hotel.Application.Test
                 .With(u => u.inscription_date = fakerData.Date.Recent())
                 .Build();
                 
-            userRepositoryMock.Setup(mock => mock.getUserByIdAsync(200))
+            userRepositoryMock.Setup(mock => mock.GetUserByIdAsync(200))
                 .ReturnsAsync(fakeUser);
 
             var handlder = new GetUserByIdHandler(userRepositoryMock.Object);
             var result = await handlder.Handle(new GetUserByIdQuery(fakeUser.id), new CancellationToken());
 
-            userRepositoryMock.Verify(m => m.getUserByIdAsync(200), Times.Never);
+            userRepositoryMock.Verify(m => m.GetUserByIdAsync(200), Times.Never);
             Assert.Null(result);
         }
 
@@ -167,6 +167,39 @@ namespace Hotel.Application.Test
 
             var handlder = new CreateUserHandler(userRepositoryMock.Object);
             var result = await handlder.Handle(new CreateUserQuery(fakeUser), new CancellationToken());
+
+            Assert.Null(result);
+        }
+
+       [Fact]
+        public async Task IsUserLoggedOutReturnsNotNullWhenUserIsOk()
+        {
+            var fakeUser = Builder<User>
+                .CreateNew()
+                .With(u => u.id = fakerData.Random.Int())
+                .With(u => u.username = fakerData.Lorem.Text())
+                .With(u => u.connexion_date = fakerData.Date.Recent())
+                .Build();
+
+            userRepositoryMock.Setup(mock => mock.LogoutUserAsync(fakeUser))
+                .ReturnsAsync(fakeUser);
+
+            var handlder = new LogoutUserHandler(userRepositoryMock.Object);
+            var result = await handlder.Handle(new LogoutUserQuery(fakeUser), new CancellationToken());
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task IsUserNotLoggedOutReturnsNullWhenUserIsKo()
+        {
+            var fakeUser = new User();
+
+            userRepositoryMock.Setup(mock => mock.LogoutUserAsync(null))
+                .ReturnsAsync(fakeUser);
+
+            var handlder = new LogoutUserHandler(userRepositoryMock.Object);
+            var result = await handlder.Handle(new LogoutUserQuery(fakeUser), new CancellationToken());
 
             Assert.Null(result);
         }

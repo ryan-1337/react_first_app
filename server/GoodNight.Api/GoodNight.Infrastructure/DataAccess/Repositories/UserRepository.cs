@@ -16,12 +16,12 @@ public class UserRepository : IUserRepository
         this.hotelContext = hotelContext;
     }
 
-    public async Task<IList<User>> getAllUserAsync()
+    public async Task<IList<User>> GetAllUserAsync()
     {
         return await this.hotelContext.Utilisateur.Select(u => new User { id = u.ID, username = u.USERNAME, password = u.PASSWORD}).ToListAsync();
     }
 
-    public async Task<User?> getUserByIdAsync(int userId)
+    public async Task<User?> GetUserByIdAsync(int userId)
     {
         var user = await this.hotelContext.Utilisateur.FirstOrDefaultAsync(u => u.ID == userId);
 
@@ -65,4 +65,21 @@ public class UserRepository : IUserRepository
             return null;
         }
     }
+    public async Task<User?> LogoutUserAsync(User user)
+    {
+        var userToLogout = await this.hotelContext.Utilisateur.FirstOrDefaultAsync(u => u.USERNAME == user.username);
+
+        if (userToLogout == null) 
+        {
+            return null;
+        }
+        else
+        {
+            userToLogout.DECONNEXION_DATE = DateTime.Now;
+            this.hotelContext.Update(userToLogout);
+            await this.hotelContext.SaveChangesAsync();
+            return new User { id = userToLogout.ID, username = userToLogout.USERNAME, deconnexion_date = userToLogout.DECONNEXION_DATE };
+        }
+    }
+
 }
