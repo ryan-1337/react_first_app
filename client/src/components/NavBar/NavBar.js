@@ -209,6 +209,7 @@ export default function NavBar(props) {
         setIsConnected(true);
         setIsConnectedName(userJson.username);
         localStorage.setItem('cookie', userJson.username);
+        localStorage.setItem('token', responseFromServer.token);
         id = responseFromServer.id;
       }
         setShowModalConnexion(false);
@@ -220,11 +221,9 @@ export default function NavBar(props) {
 
   function handleLogout() {
     const url = api + 'users/logout';
-    console.log(id);
     const userJson = {
       id: id,
     };
-    console.log(JSON.stringify(userJson));
     fetch(url, {
       method: 'POST',
       headers: {
@@ -234,7 +233,6 @@ export default function NavBar(props) {
     })
       .then(response => response.json())
       .then(responseFromServer => {
-        console.log(responseFromServer);
         if (responseFromServer.status === 401) {
           Swal.fire({
             icon: 'error',

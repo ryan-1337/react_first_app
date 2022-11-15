@@ -18,4 +18,6 @@ public class User
     public DateTime connexion_date { get; set; }
 
     public DateTime? deconnexion_date { get; set; }
+
+    public string? token { get; set; }
 }
