@@ -17,7 +17,7 @@ public class LogoutUserHandler : IRequestHandler<LogoutUserQuery, LogoutUserResp
     {
         var user = await userRepository.LogoutUserAsync(request.id);
 
-        if (user == null) return null;
+        if (user == null || user.id == 0) return null;
 
         return new LogoutUserResponse { UserName = user.username };
     }

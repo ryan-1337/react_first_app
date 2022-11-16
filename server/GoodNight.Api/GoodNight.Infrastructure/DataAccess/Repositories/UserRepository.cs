@@ -6,6 +6,7 @@ using GoodNight.Infrastructure.DataAccess.Models.Hotel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using BCrypt.Net;
+using GoodNight.Infrastructure.Utils;
 
 public class UserRepository : IUserRepository
 {
@@ -56,9 +57,11 @@ public class UserRepository : IUserRepository
         if(password)
         {
             userToLog.CONNEXION_DATE = DateTime.Now;
-            this.hotelContext.Utilisateur.Update(userToLog); 
+            this.hotelContext.Utilisateur.Update(userToLog);
+            var token = ServiceUtils.RandomKeyGenerator();
+            var connect_log = await this.hotelContext.Connect_Log.AddAsync(new Connect_Log { ID = userToLog.ID, CLE = token, GENERATED_KEY = (DateTime)userToLog.CONNEXION_DATE});
             await this.hotelContext.SaveChangesAsync();
-            return new User { id = userToLog.ID, username = userToLog.USERNAME, connexion_date = (DateTime)userToLog.CONNEXION_DATE };
+            return new User { id = userToLog.ID, username = userToLog.USERNAME, connexion_date = (DateTime)userToLog.CONNEXION_DATE, token = token };
         }
         else
         {
@@ -77,6 +80,8 @@ public class UserRepository : IUserRepository
         {
             userToLogout.DECONNEXION_DATE = DateTime.Now;
             this.hotelContext.Update(userToLogout);
+            var delete_token = await this.hotelContext.Connect_Log.Where(u => u.ID == userToLogout.ID).FirstOrDefaultAsync();
+            this.hotelContext.Connect_Log.Remove(delete_token);
             await this.hotelContext.SaveChangesAsync();
             return new User { id = userToLogout.ID, username = userToLogout.USERNAME, deconnexion_date = userToLogout.DECONNEXION_DATE };
         }

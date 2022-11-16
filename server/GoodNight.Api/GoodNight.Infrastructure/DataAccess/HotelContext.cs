@@ -10,6 +10,8 @@ namespace GoodNight.Infrastructure.DataAccess
         }
 
         public DbSet<Utilisateur> Utilisateur { get; set; }
+
+        public DbSet<Connect_Log> Connect_Log { get; set; }
     }
 }
 
