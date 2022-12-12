@@ -27,6 +27,16 @@ public class UserController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet]
+    [Route("ten")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+    public async Task<ActionResult<List<UserResponse>>> GetMaxTenUsers()
+    {
+        var query = new GetMaxTenUsersQuery();
+        var result = await mediator.Send(query);
+        return Ok(result);
+    }
+
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(User))]

@@ -31,6 +31,14 @@ namespace Hotel.Api.Test
             Assert.IsType<OkObjectResult>(result.Result);
         }
 
+        public async Task GetMaxTenUsersReturnsHttpFoundResultWhenUsersIsOk()
+        {
+            var controller = new UserController(this.mediator.Object);
+            var result = await controller.GetMaxTenUsers();
+
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
         [Fact]
         public async Task GetUsersByIdReturnsHttpFoundResultWhenUsersIsOk()
         {

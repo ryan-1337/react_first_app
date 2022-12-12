@@ -19,7 +19,24 @@ public class UserRepository : IUserRepository
 
     public async Task<IList<User>> GetAllUserAsync()
     {
-        return await this.hotelContext.Utilisateur.Select(u => new User { id = u.ID, username = u.USERNAME, password = u.PASSWORD}).ToListAsync();
+        return await this.hotelContext.Utilisateur.Select(u => new User { id = u.ID, username = u.USERNAME, password = u.PASSWORD, inscription_date = u.INSCRIPTION_DATE, connexion_date = (DateTime)u.CONNEXION_DATE,
+         deconnexion_date = u.CONNEXION_DATE, token = null}).ToListAsync();
+    }
+
+    public async Task<IList<User>> GetMaxTenUsersAsync()
+    {
+        var query = await this.hotelContext.Utilisateur.Select(u => new User
+        {
+            id = u.ID,
+            username = u.USERNAME,
+            password = u.PASSWORD,
+            inscription_date = u.INSCRIPTION_DATE,
+            connexion_date = (DateTime)u.CONNEXION_DATE,
+            deconnexion_date = u.CONNEXION_DATE,
+            token = null
+        }).ToListAsync();
+
+        return query.OrderBy(x => x.inscription_date).Take(10).ToList();
     }
 
     public async Task<User?> GetUserByIdAsync(int userId)
