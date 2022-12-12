@@ -22,14 +22,6 @@ interface UserProps {
 const getUser = async () => {
     const result = await fetch(getUserApi);
     return (await result.json()) as Array<IUsers>;
-    // return await fetch(getUserApi, {
-    //     method: 'GET',
-    // })
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //         console.log(response)
-    //         return response as Array<IUsers>;
-    //     });
 }
 
 const getMaxTenUser = async () => {

@@ -4,5 +4,5 @@ export default interface IUserData {
     id: number,
     userName: string,
     inscriptionDate: Date,
-    connexionDate?: Date |null;
+    connexionDate?: Date | null;
 }

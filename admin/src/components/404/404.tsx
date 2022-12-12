@@ -12,7 +12,7 @@ export function PageNotFound() {
             <main className="dashBoard" >
                 <div className='d-flex justify-content-center align-items-center h-100 flex-column'>
                     <h2>404 Error</h2>
-                    <h2 >Page Not Found</h2>
+                    <h2>Page Not Found</h2>
                 </div>
             </main>
             <aside className="sideBar">
