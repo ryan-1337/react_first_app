@@ -5,7 +5,7 @@ import { HomePage } from '../pages/HomePage/HomePage';
 test('should return the words', () => {
   render(<HomePage />);
 
-  expect(screen.getByText("Dashboard")).toBeInTheDocument();
+  // expect(screen.getByText("Dashboard")).toBeInTheDocument();
   expect(screen.getByText("Acceuil")).toBeInTheDocument();
   expect(screen.getByText("GoodNight - Admin")).toBeInTheDocument();
 

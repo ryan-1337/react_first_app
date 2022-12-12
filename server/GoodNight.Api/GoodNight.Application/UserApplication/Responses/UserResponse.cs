@@ -12,5 +12,7 @@ public class UserResponse
     public string UserName { get; set; }
 
     public DateTime InscriptionDate { get; set; }
+
+    public DateTime? ConnexionDate { get; set; }
 }
 

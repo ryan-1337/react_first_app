@@ -14,9 +14,9 @@ export default function SideBar() {
         <>
             <h1 className='ps-4 pt-4' style={styles.titleSize}>GoodNight - Admin</h1>
             <ul>
-                <li><a href="#"><span className='me-2'><Icon.HouseDoor /></span>Acceuil</a></li>
+                <li><a href="/"><span className='me-2'><Icon.HouseDoor /></span>Acceuil</a></li>
                 <li><a href="#"><span className='me-2'><Icon.Briefcase /></span>Formules</a></li>
-                <li><a href="#"><span className='me-2'><Icon.List /></span>Utilisateurs</a></li>
+                <li><a href="/users"><span className='me-2'><Icon.List /></span>Utilisateurs</a></li>
             </ul>
         </>
     );

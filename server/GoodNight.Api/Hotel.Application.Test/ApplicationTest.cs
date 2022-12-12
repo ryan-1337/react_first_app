@@ -46,6 +46,29 @@ namespace Hotel.Application.Test
         }
 
         [Fact]
+        public async Task GetMaxTenUsersHandlerReturnsNotNullWhenUsersIsOk()
+        {
+            var fakeUserList = Builder<User>
+                .CreateListOfSize(5)
+                .All()
+                .With(u => u.id = fakerData.Random.Int())
+                .With(u => u.username = fakerData.Lorem.Text())
+                .With(u => u.inscription_date = fakerData.Date.Recent())
+                .Build()
+                .ToList();
+                
+            userRepositoryMock.Setup(mock => mock.GetMaxTenUsersAsync())
+                .ReturnsAsync(fakeUserList);
+
+            var handlder = new GetMaxTenUsersHandler(userRepositoryMock.Object);
+            var result = await handlder.Handle(new GetMaxTenUsersQuery(), new CancellationToken());
+
+            userRepositoryMock.Verify(m => m.GetMaxTenUsersAsync(), Times.Once);
+            Assert.NotNull(result);
+            Assert.Equal(5, result.Count);
+        }
+
+        [Fact]
         public async Task GetAllUsersHandlerReturnsEmptyValueWhenUsersIsEmpty()
         {
             var fakeUserList = new List<User>();
@@ -57,6 +80,21 @@ namespace Hotel.Application.Test
             var result = await handlder.Handle(new GetAllUsersQuery(), new CancellationToken());
 
             userRepositoryMock.Verify(m => m.GetAllUserAsync(), Times.Once);
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public async Task GetMaxTenUsersHandlerReturnsEmptyValueWhenUsersIsEmpty()
+        {
+            var fakeUserList = new List<User>();
+                
+            userRepositoryMock.Setup(mock => mock.GetMaxTenUsersAsync())
+                .ReturnsAsync(fakeUserList);
+
+            var handlder = new GetMaxTenUsersHandler(userRepositoryMock.Object);
+            var result = await handlder.Handle(new GetMaxTenUsersQuery(), new CancellationToken());
+
+            userRepositoryMock.Verify(m => m.GetMaxTenUsersAsync(), Times.Once);
             Assert.Empty(result);
         }
 

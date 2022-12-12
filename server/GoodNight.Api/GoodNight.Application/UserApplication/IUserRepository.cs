@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 public interface IUserRepository
 {
     Task<IList<User>> GetAllUserAsync();
+    Task<IList<User>> GetMaxTenUsersAsync();
     Task<User?> GetUserByIdAsync(int id);
     Task<User?> CreateUserAsync(User user);
     Task<User?> LoginAsync(User user);
