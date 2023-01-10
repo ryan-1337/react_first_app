@@ -1,7 +1,7 @@
 services:
   db:
     image: 
-      mcr.microsoft.com/mssql/server:2022-latest
+      mcr.microsoft.com/mssql/server:2019-latest
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=password_harD

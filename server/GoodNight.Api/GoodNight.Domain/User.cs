@@ -15,7 +15,7 @@ public class User
 
     public DateTime inscription_date { get; set; }
 
-    public DateTime connexion_date { get; set; }
+    public DateTime? connexion_date { get; set; }
 
     public DateTime? deconnexion_date { get; set; }
 

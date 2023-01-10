@@ -19,8 +19,8 @@ public class UserRepository : IUserRepository
 
     public async Task<IList<User>> GetAllUserAsync()
     {
-        return await this.hotelContext.Utilisateur.Select(u => new User { id = u.ID, username = u.USERNAME, password = u.PASSWORD, inscription_date = u.INSCRIPTION_DATE, connexion_date = (DateTime)u.CONNEXION_DATE,
-         deconnexion_date = u.CONNEXION_DATE, token = null}).ToListAsync();
+        return await this.hotelContext.Utilisateur.Select(u => new User { id = u.ID, username = u.USERNAME, password = u.PASSWORD, inscription_date = u.INSCRIPTION_DATE, connexion_date = null,
+         deconnexion_date = null, token = null}).ToListAsync();
     }
 
     public async Task<IList<User>> GetMaxTenUsersAsync()
@@ -101,6 +101,21 @@ public class UserRepository : IUserRepository
             this.hotelContext.Connect_Log.Remove(delete_token);
             await this.hotelContext.SaveChangesAsync();
             return new User { id = userToLogout.ID, username = userToLogout.USERNAME, deconnexion_date = userToLogout.DECONNEXION_DATE };
+        }
+    }
+    public async Task<User?> DeleteUserAsync(int id)
+    {
+        var userToDelete = await this.hotelContext.Utilisateur.Where(u => u.ID == id).FirstOrDefaultAsync();
+
+        if (userToDelete == null) 
+        {
+            return null;
+        }
+        else
+        {
+            this.hotelContext.Utilisateur.Remove(userToDelete);
+            await this.hotelContext.SaveChangesAsync();
+            return new User { id = userToDelete.ID, username = userToDelete.USERNAME };
         }
     }
 
