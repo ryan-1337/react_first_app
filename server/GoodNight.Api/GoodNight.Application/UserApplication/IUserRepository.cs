@@ -15,4 +15,5 @@ public interface IUserRepository
     Task<User?> CreateUserAsync(User user);
     Task<User?> LoginAsync(User user);
     Task<User?> LogoutUserAsync(int id);
+    Task<User?> DeleteUserAsync(int id);
 }

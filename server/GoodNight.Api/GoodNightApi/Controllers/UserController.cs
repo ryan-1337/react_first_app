@@ -89,4 +89,21 @@ public class UserController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<UserResponse>> DeleteUser(int id)
+    {
+
+        var query = new DeleteUserQuery(id);
+        var result = await mediator.Send(query);
+        
+        if(result == null)
+        {
+            return NoContent();
+        }
+
+        return Accepted(result);
+    }
 }

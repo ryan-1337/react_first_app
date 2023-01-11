@@ -20,6 +20,6 @@ public class LoginHandler : IRequestHandler<LoginQuery, LoginResponse>
 
         if (user == null) return null;
 
-        return new LoginResponse { Id = user.id, UserName = user.username, ConnexionDate = user.connexion_date, Token = user.token };
+        return new LoginResponse { Id = user.id, UserName = user.username, ConnexionDate = (DateTime)user.connexion_date, Token = user.token };
     }
 }
