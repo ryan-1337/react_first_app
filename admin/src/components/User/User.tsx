@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import api from "../../env/base_api_url"
 import IUsers from "../../types/Users"
 import Modal from 'react-bootstrap/Modal';
-import Swal from 'sweetalert2';
+import * as swal from 'sweetalert';
 
 const getUserApi = api + 'users';
 const getMaxTenUserApi = api + 'users/ten'
@@ -52,13 +52,7 @@ export default function User(url: UserProps) {
             method: 'DELETE',
         })
         .then(res => {
-            Swal.fire({
-            position: 'top-end',
-            icon: 'succes',
-            title: ' Deleted !',
-            showConfirmButton: false,
-            timer: 1500
-          })
+            getUser().then(res => setUserList(res));
         })
     };
     return (
