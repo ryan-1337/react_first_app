@@ -41,6 +41,7 @@ export default function User(url: UserProps) {
        getUser().then(res => setUserList(res));
        getMaxTenUser().then(res => setMaxTenUserList(res));
     }, []);
+
     const toggleModalDelete = (idUser : Number) => {
         setIdUserSelected(idUser);
         setShowModalDelete(true);
@@ -56,7 +57,7 @@ export default function User(url: UserProps) {
         })
     };
     return (
-        <>
+    <>
         <Card className="cardFormula d-flex" style={{ width: isUser ? '100%' : '18rem', marginTop: '2em', marginLeft: '3rem' }}>
             <Card.Body style={styles.cardUser}>
                 {!isUser && <Card.Title className="mb-3">Utilisateurs <a href="/users"><button className="btn btn-primary btn-sm">Voir tous</button></a></Card.Title>}
